@@ -1,4 +1,10 @@
 from src.model.decoder import DecoderBlock, SoundStreamDecoder
+from src.model.discriminators import (
+    MultiScaleDiscriminator,
+    ScaleDiscriminator,
+    STFTDiscriminator,
+    STFTResidualUnit,
+)
 from src.model.encoder import EncoderBlock, ResidualUnit, SoundStreamEncoder
 from src.model.rvq import ResidualVectorQuantizer, VectorQuantizer
 from src.model.soundstream_model import SoundStreamModel
@@ -12,4 +18,8 @@ __all__ = [
     "DecoderBlock",
     "SoundStreamDecoder",
     "SoundStreamModel",
+    "STFTResidualUnit",
+    "STFTDiscriminator",
+    "ScaleDiscriminator",
+    "MultiScaleDiscriminator",
 ]
