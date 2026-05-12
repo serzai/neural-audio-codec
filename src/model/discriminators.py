@@ -192,3 +192,30 @@ class MultiScaleDiscriminator(nn.Module):
             features_list.extend(features)
 
         return logits_list, features_list
+
+
+class SoundStreamDiscriminator(nn.Module):
+    """
+    STFT + MultiScale discriminators.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.stft = STFTDiscriminator()
+        self.ms = MultiScaleDiscriminator()
+
+    def forward(self, x):
+        """
+        Args:
+            x (torch.Tensor): audio tensor of shape (B, 1, T).
+        Returns:
+            logits_list (list): final output scores from all discriminators.
+            features_list (list): aggregated activations.
+        """
+        stft_logits, stft_features = self.stft(x)
+        ms_logits, ms_features = self.ms(x)
+
+        logits_list = stft_logits + ms_logits
+        features_list = stft_features + ms_features
+
+        return logits_list, features_list
