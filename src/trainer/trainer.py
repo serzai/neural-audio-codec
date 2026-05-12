@@ -78,9 +78,6 @@ class Trainer(BaseTrainer):
         x_fake = outputs["fake_audio"]
         batch.update(outputs)
 
-        all_losses = self.criterion(**batch)
-        batch.update(all_losses)
-
         if self.is_train:
             # train discriminator
             self.optimizer_d.zero_grad()
@@ -135,7 +132,7 @@ class Trainer(BaseTrainer):
                 d_fake_scores=d_fake_scores,
             )
 
-            loss_g = g_loss_dict["loss"] + outputs["loss"]
+            loss_g = g_loss_dict["loss"] + outputs["commitment_loss"]
             batch["loss_g"] = loss_g
             batch.update(
                 {key: value for key, value in g_loss_dict.items() if key != "loss"}
