@@ -62,8 +62,8 @@ class SoundStreamModel(nn.Module):
         reconstructed_audio = self.decoder(quantized_features)
 
         return {
-            "audio": reconstructed_audio,
-            "loss": loss,
+            "fake_audio": reconstructed_audio,
+            "commitment_loss": loss,
         }
 
     def encode(self, audio):
