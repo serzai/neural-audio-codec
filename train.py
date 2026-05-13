@@ -39,16 +39,34 @@ def main(config):
 
     # build model architecture, then print to console
     model = instantiate(config.model).to(device)
+    discriminator = instantiate(config.discriminator).to(device)
+    logger.info("Generator:")
     logger.info(model)
+    logger.info("Discriminator:")
+    logger.info(discriminator)
 
     # get function handles of loss and metrics
-    loss_function = instantiate(config.loss_function).to(device)
+    criterion_g = instantiate(config.loss_function_g).to(device)
+    criterion_d = instantiate(config.loss_function_d).to(device)
     metrics = instantiate(config.metrics)
 
     # build optimizer, learning rate scheduler
-    trainable_params = filter(lambda p: p.requires_grad, model.parameters())
-    optimizer = instantiate(config.optimizer, params=trainable_params)
-    lr_scheduler = instantiate(config.lr_scheduler, optimizer=optimizer)
+    trainable_params_g = filter(lambda p: p.requires_grad, model.parameters())
+    optimizer_g = instantiate(config.optimizer_g, params=trainable_params_g)
+
+    trainable_params_d = filter(lambda p: p.requires_grad, discriminator.parameters())
+    optimizer_d = instantiate(config.optimizer_d, params=trainable_params_d)
+
+    lr_scheduler_g = (
+        instantiate(config.lr_scheduler_g, optimizer=optimizer_g)
+        if "lr_scheduler_g" in config
+        else None
+    )
+    lr_scheduler_d = (
+        instantiate(config.lr_scheduler_d, optimizer=optimizer_d)
+        if "lr_scheduler_d" in config
+        else None
+    )
 
     # epoch_len = number of iterations for iteration-based training
     # epoch_len = None or len(dataloader) for epoch-based training
@@ -56,10 +74,14 @@ def main(config):
 
     trainer = Trainer(
         model=model,
-        criterion=loss_function,
+        discriminator=discriminator,
+        criterion_g=criterion_g,
+        criterion_d=criterion_d,
+        optimizer_g=optimizer_g,
+        optimizer_d=optimizer_d,
+        lr_scheduler_g=lr_scheduler_g,
+        lr_scheduler_d=lr_scheduler_d,
         metrics=metrics,
-        optimizer=optimizer,
-        lr_scheduler=lr_scheduler,
         config=config,
         device=device,
         dataloaders=dataloaders,
