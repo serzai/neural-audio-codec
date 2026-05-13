@@ -1,0 +1,10 @@
+train:
+  _target_: src.datasets.LibriSpeechDataset
+  data_dir: "/kaggle/input/librispeech/train-clean-100"
+  segment_len: 8000
+  sample_rate: 16000
+val:
+  _target_: src.datasets.LibriSpeechDataset
+  data_dir: "/kaggle/input/librispeech/test-clean"
+  segment_len: 8000
+  sample_rate: 16000

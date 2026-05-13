@@ -1,0 +1,5 @@
+defaults:
+  - writer: cometml
+  - datasets: librispeech
+  - dataloader: soundstream
+  - _self_
