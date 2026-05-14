@@ -2,6 +2,7 @@ from src.model.decoder import DecoderBlock, SoundStreamDecoder
 from src.model.discriminators import (
     MultiScaleDiscriminator,
     ScaleDiscriminator,
+    SoundStreamDiscriminator,
     STFTDiscriminator,
     STFTResidualUnit,
 )
@@ -22,4 +23,5 @@ __all__ = [
     "STFTDiscriminator",
     "ScaleDiscriminator",
     "MultiScaleDiscriminator",
+    "SoundStreamDiscriminator",
 ]
