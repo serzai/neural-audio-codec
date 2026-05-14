@@ -1,9 +1,8 @@
 defaults:
   - writer: cometml
-  - metrics: example
-  - datasets: example
-  - dataloader: example
-  - transforms: example_only_batch
+  - metrics: soundstream
+  - datasets: librispeech
+  - dataloader: soundstream
   - _self_
 model:
   _target_: src.model.SoundStreamModel

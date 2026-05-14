@@ -1,0 +1,15 @@
+inference:
+  - _target_: src.metrics.STOIMetric
+    name: "STOI"
+    device: ${trainer.device}
+    metric:
+      _target_: torchmetrics.audio.ShortTimeObjectiveIntelligibility
+      fs: 16000
+      extended: False
+  - _target_: src.metrics.NISQAMetric
+    name: "NISQA"
+    device: ${trainer.device}
+    metric:
+      _target_: torchmetrics.audio.NonIntrusiveSpeechQualityAssessment
+
+train: []
