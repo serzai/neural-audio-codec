@@ -59,7 +59,11 @@ def get_dataloaders(config, device):
             tensor name.
     """
     # transforms or augmentations init
-    batch_transforms = instantiate(config.transforms.batch_transforms)
+    batch_transforms = (
+        instantiate(config.transforms.batch_transforms)
+        if "transforms" in config
+        else {}
+    )
     move_batch_transforms_to_device(batch_transforms, device)
 
     # dataset partitions init

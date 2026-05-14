@@ -1,5 +1,5 @@
 import torch
-from tochmetrics.audio import (
+from torchmetrics.audio import (
     NonIntrusiveSpeechQualityAssessment,
     ShortTimeObjectiveIntelligibility,
 )

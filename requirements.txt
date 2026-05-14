@@ -9,6 +9,7 @@ pandas
 comet_ml
 hydra-core
 librosa
+pystoi
 
 black
 isort

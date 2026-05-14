@@ -1,5 +1,4 @@
-defaults:
-  - writer: cometml
-  - datasets: librispeech
-  - dataloader: soundstream
-  - _self_
+_target_: torch.utils.data.DataLoader
+batch_size: 12
+num_workers: 2
+pin_memory: True
