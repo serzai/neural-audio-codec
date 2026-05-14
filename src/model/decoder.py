@@ -9,7 +9,7 @@ class DecoderBlock(nn.Module):
     DecoderBlock for Decoder
     """
 
-    def __int__(self, in_channels, out_channels, stride):
+    def __init__(self, in_channels, out_channels, stride):
         """
         Args:
             in_channels (int): number of input channels
