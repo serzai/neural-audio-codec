@@ -145,6 +145,8 @@ class Trainer(BaseTrainer):
         for met in metric_funcs:
             metrics.update(met.name, met(**batch))
 
+        batch["loss"] = batch["loss_g"]
+
         return batch
 
     def _log_batch(self, batch_idx, batch, mode="train"):

@@ -41,7 +41,7 @@ class VectorQuantizer(nn.Module):
         z_q = self.codebook(indices).view(z_T.shape)
         z_q = z_q.transpose(1, 2).contiguous()
 
-        loss = torch.mean((z_q.detach() - z) ** 2)
+        loss = torch.mean((z_q.detach() - z) ** 2) + torch.mean((z_q - z.detach()) ** 2)
 
         z_q = z + (z_q - z).detach()
 
