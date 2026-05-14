@@ -68,16 +68,16 @@ class STFTDiscriminator(nn.Module):
 
         self.blocks = nn.ModuleList(
             [
-                STFTResidualUnit(base_channels, base_channels, (1, 2)),
+                STFTResidualUnit(base_channels, base_channels, (2, 1)),
                 STFTResidualUnit(base_channels, 2 * base_channels, (2, 2)),
-                STFTResidualUnit(2 * base_channels, 4 * base_channels, (1, 2)),
+                STFTResidualUnit(2 * base_channels, 4 * base_channels, (2, 1)),
                 STFTResidualUnit(4 * base_channels, 4 * base_channels, (2, 2)),
-                STFTResidualUnit(4 * base_channels, 8 * base_channels, (1, 2)),
+                STFTResidualUnit(4 * base_channels, 8 * base_channels, (2, 1)),
                 STFTResidualUnit(8 * base_channels, 8 * base_channels, (2, 2)),
             ]
         )
 
-        self.conv2 = nn.Conv2d(8 * base_channels, 1, kernel_size=(1, 8))
+        self.conv2 = nn.Conv2d(8 * base_channels, 1, kernel_size=(9, 1))
 
     def forward(self, x):
         """

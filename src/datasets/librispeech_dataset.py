@@ -23,7 +23,7 @@ class LibriSpeechDataset(Dataset):
         self.segment_len = segment_len
         self.sample_rate = sample_rate
 
-        self.audio_files = sorted(list(glob(f"{data_dir}/**/*.flac")))
+        self.audio_files = sorted(list(glob(f"{data_dir}/**/*.flac", recursive=True)))
 
         if len(self.audio_files) == 0:
             raise FileNotFoundError(f"No .flac files found in {data_dir}")
