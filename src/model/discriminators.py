@@ -42,7 +42,12 @@ class STFTResidualUnit(nn.Module):
         Returns:
             output (torch.Tensor): tensor of shape (B, C_out, F/s_f, T/s_t).
         """
-        return self.skip(x) + self.block(x)
+        out_block = self.block(x)
+        out_skip = self.skip(x)
+
+        out_block = out_block[..., : out_skip.shape[2], : out_skip.shape[3]]
+
+        return out_skip + out_block
 
 
 class STFTDiscriminator(nn.Module):
