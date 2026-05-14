@@ -11,5 +11,6 @@ inference:
     device: ${trainer.device}
     metric:
       _target_: torchmetrics.audio.NonIntrusiveSpeechQualityAssessment
+      fs: 16000
 
 train: []
