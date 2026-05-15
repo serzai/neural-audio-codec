@@ -127,7 +127,9 @@ def saving_init(save_dir, config):
     save_dir.mkdir(exist_ok=True, parents=True)
 
     if run_id is None:
-        run_id = generate_id(length=config.writer.id_length)
+        run_id = config.writer.get("run_id") or generate_id(
+            length=config.writer.id_length
+        )
 
     OmegaConf.set_struct(config, False)
     config.writer.run_id = run_id
