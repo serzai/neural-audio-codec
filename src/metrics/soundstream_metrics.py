@@ -36,6 +36,14 @@ class STOIMetric(BaseMetric):
         audio = audio.squeeze(1)
         fake_audio = fake_audio.squeeze(1)
 
+        real_len = audio.shape[-1]
+        fake_len = fake_audio.shape[-1]
+
+        if fake_len > real_len:
+            fake_audio = fake_audio[..., :real_len]
+        elif fake_len < real_len:
+            fake_audio = torch.nn.functional.pad(fake_audio, (0, real_len - fake_len))
+
         return self.metric(fake_audio, audio).mean()
 
 

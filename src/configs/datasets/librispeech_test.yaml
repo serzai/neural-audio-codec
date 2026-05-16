@@ -1,0 +1,5 @@
+test:
+  _target_: src.datasets.LibriSpeechDataset
+  data_dir: "/kaggle/input/datasets/victorling/librispeech-clean/LibriSpeech/test-clean"
+  segment_len: null
+  sample_rate: 16000

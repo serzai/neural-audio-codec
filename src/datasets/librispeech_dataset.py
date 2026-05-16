@@ -54,6 +54,9 @@ class LibriSpeechDataset(Dataset):
         if max_val > 0:
             waveform /= max_val
 
+        if self.segment_len is None:
+            return {"audio": waveform}
+
         num_samples = waveform.size(1)
         if num_samples > self.segment_len:
             max_start = num_samples - self.segment_len
