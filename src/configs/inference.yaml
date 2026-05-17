@@ -4,6 +4,7 @@ defaults:
   - datasets: librispeech
   - dataloader: inference
   - transforms: soundstream
+  - writer: cometml
   - _self_
 inferencer:
   device_tensors: ["audio"] # which tensors should be on device (ex. GPU)
@@ -13,3 +14,6 @@ inferencer:
   from_pretrained: "saved/soundstream_full_train/checkpoint-epoch100.pth" # path to the pretrained model
 trainer:
   device: ${inferencer.device}
+  save_dir: "saved"
+  override: True
+  resume_from: null
