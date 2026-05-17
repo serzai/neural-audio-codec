@@ -36,7 +36,7 @@ python inference.py \
     inferencer.from_pretrained="saved/model_best.pth"
 ```
 
-My final run achieved a STOI of 0.928 and a NISQA of 3.415 on the full `test-clean` set.
+My final run achieved a STOI of 0.931 and a NISQA of 3.32 on the full `test-clean` set.
 
 ## Training from Scratch
 
@@ -56,7 +56,8 @@ All training metrics were logged to CometML. You can view the full training curv
 
 ## Report
 
-Full project report is available in [CometML Report](https://www.comet.com/cep3au/neural-audio-codec/reports/DuOnraTnTzpIFirJJ7VQaxNwk).
+Report with curves is available in [CometML Report](https://www.comet.com/cep3au/neural-audio-codec/reports/DuOnraTnTzpIFirJJ7VQaxNwk).
+Analysis of the results is located in the `report.ipynb`.
 
 ## Template
 
